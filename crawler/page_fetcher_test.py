@@ -29,7 +29,7 @@ class PageFetcherTest(unittest.TestCase):
                               <a href='xxi/lala.html'></a>\
                              <a href='http://www.terra.com.br/oi/lala.html'></a>"
 
-        arr_expected_links = [(urlparse('http://www.pudim.com.br/lala.html'), 3),
+        arr_expected_links = [(urlparse('https://www.pudim.com.br/lala.html'), 3),
                               (urlparse('http://www.pudim.com.br/xxi/lala.html'), 3),
                               (urlparse('http://www.terra.com.br/oi/lala.html'), 0)
                               ]
