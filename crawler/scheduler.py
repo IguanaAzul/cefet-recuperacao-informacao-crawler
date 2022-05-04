@@ -7,7 +7,6 @@ from time import sleep
 from collections import OrderedDict
 from .domain import Domain
 
-
 class Scheduler:
     # tempo (em segundos) entre as requisições
     TIME_LIMIT_BETWEEN_REQUESTS = 5
@@ -101,6 +100,10 @@ class Scheduler:
         if not (urlparse(url).netloc in self.dic_robots_per_domain.keys()):
             rp = robotparser.RobotFileParser()
             rp.set_url(url)
-            rp.read()
+            try:
+                rp.read()
+            except:
+                print("Deu ruim")
+                return False
             self.dic_robots_per_domain[urlparse(url).netloc] = rp.can_fetch("*", url)
         return self.dic_robots_per_domain[urlparse(url).netloc]

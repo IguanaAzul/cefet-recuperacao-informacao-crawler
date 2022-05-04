@@ -1,3 +1,4 @@
+import urllib.error
 from typing import Optional
 
 from bs4 import BeautifulSoup
@@ -5,7 +6,7 @@ from threading import Thread
 import requests
 from urllib.parse import urlparse, urljoin, ParseResult
 
-
+k=0
 class PageFetcher(Thread):
     USER_AGENT = 'pseudoBot'
 
@@ -31,7 +32,10 @@ class PageFetcher(Thread):
         """
         soup = BeautifulSoup(bin_str_content, features="lxml")
         for link in soup.select("a[href]"):
-            obj_new_url = urlparse(urljoin(obj_url.geturl(), link.get('href')))
+            try:
+                obj_new_url = urlparse(urljoin(obj_url.geturl(), link.get('href')))
+            except urllib.error.URLError:
+                continue
             new_depth = 0 if obj_url.netloc != obj_new_url.netloc else depth + 1
             if self.obj_scheduler.can_add_page(obj_new_url, new_depth):
                 self.obj_scheduler.add_new_page(obj_new_url, new_depth)
@@ -50,6 +54,9 @@ class PageFetcher(Thread):
                     print(obj_url)
                     self.discover_links(obj_url[0], obj_url[1], response)
                     self.obj_scheduler.count_fetched_page()
+                    global k
+                    k += 1
+                    print(k)
 
     def run(self):
         """
