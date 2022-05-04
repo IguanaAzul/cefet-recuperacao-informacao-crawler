@@ -35,7 +35,8 @@ class PageFetcher(Thread):
             new_depth = 0 if obj_url.netloc != obj_new_url.netloc else depth + 1
             if self.obj_scheduler.can_add_page(obj_new_url, new_depth):
                 self.obj_scheduler.add_new_page(obj_new_url, new_depth)
-            yield obj_new_url, new_depth
+                # print(obj_new_url.geturl(), new_depth, obj_url.geturl())
+            # yield obj_new_url, new_depth
 
     def crawl_new_url(self):
         """
@@ -49,7 +50,6 @@ class PageFetcher(Thread):
                     print(obj_url)
                     self.discover_links(obj_url[0], obj_url[1], response)
                     self.obj_scheduler.count_fetched_page()
-
 
     def run(self):
         """
