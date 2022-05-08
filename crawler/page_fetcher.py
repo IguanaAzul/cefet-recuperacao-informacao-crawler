@@ -6,7 +6,7 @@ from threading import Thread
 import requests
 from urllib.parse import urlparse, urljoin, ParseResult
 
-k=0
+
 class PageFetcher(Thread):
     USER_AGENT = 'pseudoBot'
 
@@ -54,9 +54,6 @@ class PageFetcher(Thread):
                     print(obj_url)
                     self.discover_links(obj_url[0], obj_url[1], response)
                     self.obj_scheduler.count_fetched_page()
-                    global k
-                    k += 1
-                    print(k)
 
     def run(self):
         """

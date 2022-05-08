@@ -102,8 +102,8 @@ class Scheduler:
             rp.set_url(url)
             try:
                 rp.read()
-            except:
-                print("Deu ruim")
+            except Exception as e:
+                print(f"A url '{url}' não foi coletada, a seguinte exceção foi lançada:\n{type(e)}: {e}")
                 return False
             self.dic_robots_per_domain[urlparse(url).netloc] = rp.can_fetch("*", url)
         return self.dic_robots_per_domain[urlparse(url).netloc]
