@@ -51,7 +51,7 @@ class PageFetcher(Thread):
             if self.obj_scheduler.can_fetch_page(obj_url[0]):
                 response = self.request_url(obj_url[0])
                 if response:
-                    print(obj_url)
+                    # print(obj_url)
                     self.discover_links(obj_url[0], obj_url[1], response)
                     self.obj_scheduler.count_fetched_page()
 
