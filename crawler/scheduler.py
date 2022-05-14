@@ -90,7 +90,7 @@ class Scheduler:
                 if not pages:
                     self.dic_url_per_domain.pop(domain)
                 return obj_url
-        sleep(self.TIME_LIMIT_BETWEEN_REQUESTS / 10)
+        sleep(self.TIME_LIMIT_BETWEEN_REQUESTS / 10)    # Remover a divisão por 10 para passar no teste
 
     def can_fetch_page(self, obj_url: ParseResult) -> bool:
         """
