@@ -8,11 +8,10 @@ from urllib.parse import urlparse, urljoin, ParseResult
 
 
 class PageFetcher(Thread):
-    USER_AGENT = 'pseudoBot'
-
     def __init__(self, obj_scheduler):
         super().__init__()
         self.obj_scheduler = obj_scheduler
+        self.USER_AGENT = obj_scheduler.usr_agent
 
     def request_url(self, obj_url: ParseResult) -> Optional[bytes] or None:
         """
